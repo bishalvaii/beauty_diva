@@ -28,7 +28,11 @@ const Dashboard = () => {
   const navigateToAboutUs = () => {
     router.push('/aboutus')
   }
-    return (
+
+  const navigateToContact = () => {
+    router.push('/contact')
+  } 
+      return (
         <>
             {/* Navbar */}
             <AppBar position="static" sx={{ bgcolor: "#DEC5B7" }}>
@@ -48,7 +52,7 @@ const Dashboard = () => {
                             About Us
                         </Typography>
                         </Button>
-                        <Typography variant="h6" component="div">
+                        <Typography variant="h6" component="div" onClick={navigateToContact}>
                             Contact Us
                         </Typography>
                     </Box>
