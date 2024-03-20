@@ -25,13 +25,11 @@ const ShippingPage = () => {
     // For example, you can redirect to a specific URL for each payment gateway
     if (paymentGateway === 'esewa') {
       // Redirect to eSewa payment page
-      router.push('/payment/esewa');
-    } else if (paymentGateway === 'khalti') {
-      // Redirect to Khalti payment page
-      router.push('/payment/khalti');
-    } else {
+      router.push('/paymentesewa');
+    }
+     else {
       // Redirect to Cash on Delivery page
-      router.push('/payment/cash-on-delivery');
+      router.push('/orderconfirmation');
     }
   };
 
@@ -99,7 +97,7 @@ const ShippingPage = () => {
               sx={{mt: 2}}
             >
               <MenuItem value="esewa">eSewa</MenuItem>
-              <MenuItem value="khalti">Khalti</MenuItem>
+             
               <MenuItem value="cash-on-delivery">Cash on Delivery</MenuItem>
             </Select>
           </FormControl>

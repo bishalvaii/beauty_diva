@@ -32,6 +32,9 @@ const Dashboard = () => {
   const navigateToContact = () => {
     router.push('/contact')
   } 
+  const navigateToHome = () => {
+    router.push('/dashboard')
+  }
       return (
         <>
             {/* Navbar */}
@@ -39,9 +42,11 @@ const Dashboard = () => {
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     {/* Left section */}
                     <Box style={{ display: 'flex', gap: '20px', justifyContent: 'space-between', alignItems: 'center' }}>
+                       <Button onClick={navigateToHome}>
                         <Typography variant="h6" component="div">
                             Home
                         </Typography>
+                        </Button>
                         <Button onClick={navigateToShop}>
                         <Typography variant="h6" component="div">
                             Shop
