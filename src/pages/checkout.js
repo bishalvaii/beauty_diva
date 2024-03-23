@@ -50,7 +50,7 @@
 
     const renderProductImage = (product) => {
       return (
-        <Image src={product.image} alt={product.name} style={{ width: '200px', height: '200px', marginRight: '10px' }} />
+        <Image src={product.image.url} alt={product.name} width={product.image.width} height={product.image.height}style={{ width: '200px', height: '200px', marginRight: '10px' }} />
       );
     };
 

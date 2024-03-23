@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent, Typography, Button } from '@mui/material';
 import Image from 'next/image';
+import { Box } from '@mui/system';
 
 const ProductCard = ({ product, addToCart }) => {
   const handleAddToCart = () => {
@@ -8,9 +9,12 @@ const ProductCard = ({ product, addToCart }) => {
   };
   return (
     <Card sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '2rem auto' }}>
-      <div sx={{ margin: 'auto', marginTop: '1rem' }}>
-        <Image src={product.image} alt={product.name} width={300} height={350} />
-      </div>
+      <Box sx={{ margin: 'auto', marginTop: '1rem'}}>
+      <div className="relative">
+
+        <Image  src={product.image.url} alt={product.name} width={product.image.width} height={product.image.height} />
+    </div>
+      </Box>  
       <CardContent>
         <Typography variant='h4' gutterBottom>
           {product.name}

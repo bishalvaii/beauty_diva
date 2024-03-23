@@ -24,27 +24,45 @@ const SignupPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Basic validation
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
+  
+    try {
+      // Make POST request to signup endpoint
+      const response = await fetch('http://localhost:5000/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      // Parse response JSON
+      const data = await response.json();
+  
+      // Check if signup was successful
+      if (response.ok) {
+        console.log(data.message);
+         // Save username and password in localStorage
+         localStorage.setItem('username', formData.username);
+         localStorage.setItem('password', formData.password);
+        // Reset form data
+        setFormData({
+          fullName: '',
+          contactNo: '',
+          email: '',
+          username: '',
+          password: '',
+          confirmPassword: '',
+        });
+        // Navigate to the login page
+        router.push('/login');
+      } else {
+        console.error(data.error || 'Signup failed');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
     }
-    // You can perform further validation here if needed
-    // For now, just log the form data
-    console.log("Form Data:", formData);
-    // Reset form data
-    setFormData({
-      fullName: '',
-      contactNo: '',
-      email: '',
-      username: '',
-      password: '',
-      confirmPassword: ''
-    });
-    // Navigate to the login page
-    router.push('/login');
   };
 
   return (

@@ -35,6 +35,8 @@ const Dashboard = () => {
   const navigateToHome = () => {
     router.push('/dashboard')
   }
+
+  const username = localStorage.getItem('username')
       return (
         <>
             {/* Navbar */}
@@ -71,6 +73,7 @@ const Dashboard = () => {
                             <SearchIcon />
                         </IconButton>
                         <Avatar />
+                       {username}
                         <IconButton color="inherit">
                             <ShoppingCartIcon />
                         </IconButton>
@@ -257,13 +260,13 @@ setting essentials."            </Typography>
       </Grid>
     </Box>
 
-    <Box bgcolor="#DEC5B7" py={4}>
+    <Box bgcolor="#DEC5B7" py={4} display="flex" justifyContent='space-around'>
       <Box textAlign="center" mb={2}>
         <Typography variant="h5" gutterBottom>
           About the Shop
         </Typography>
         <Typography variant="body1">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque
+          Lorem ipsum dolor sit amet,<br /> consectetur adipiscing elit. Nullam scelerisque<br />
           aliquam nunc, eget aliquam est congue eu.
         </Typography>
       </Box>
@@ -273,13 +276,13 @@ setting essentials."            </Typography>
           Main Menu
         </Typography>
         <Typography variant="body1">
-          - Home
+           Home
           <br />
-          - Products
+           Products
           <br />
-          - Services
+           Services
           <br />
-          - Contact Us
+           Contact Us
         </Typography>
       </Box>
 
@@ -295,7 +298,9 @@ setting essentials."            </Typography>
           Email: info@example.com
         </Typography>
       </Box>
-      <Box position="absolute" >
+      
+    </Box>
+    <Box position="absolute" >
         <IconButton color="inherit" aria-label="facebook">
           <Facebook />
         </IconButton>
@@ -306,7 +311,6 @@ setting essentials."            </Typography>
           <Pinterest />
         </IconButton>
       </Box>
-    </Box>
 
         </>
     );
