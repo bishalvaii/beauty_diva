@@ -32,6 +32,7 @@ const router = useRouter()
 const addToCart = (product) => {
   setCartItems([...cartItems, product])
   setCartCount(cartCount + 1)
+  console.log(cartItems)
 }
 
 const calculateTotalAmount = () => {

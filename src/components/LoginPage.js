@@ -20,18 +20,37 @@ const LoginPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     // Perform validation here if needed
     // For now, just log the form data
-    console.log('Form Data:', formData);
-    // Reset form data
-    setFormData({
-      username: '',
-      password: '',
-    });
-    // Navigate to the dashboard page upon successful login
-    router.push('/dashboard');
+   try {
+      const response = await fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          
+        },
+        body: JSON.stringify(formData)
+      })
+
+      const data = await response.json()
+      if(response.ok) {
+        setFormData({
+          username: '',
+          password: ''
+        })
+        localStorage.setItem('userId', data.userId);
+        router.push('/dashboard');
+      }
+     else {
+      console.error(data.error || 'Login failed')
+    }
+  } catch(error) {
+        console.error('An error occured:', error)
+
+    }
+
   };
 
   return (

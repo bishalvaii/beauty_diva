@@ -4,6 +4,7 @@
   import AddIcon from '@mui/icons-material/Add';
   import DeleteIcon from '@mui/icons-material/Delete';
   import RemoveIcon from '@mui/icons-material/Remove'
+  import { v4 as uuidv4 } from 'uuid';
 
   import Image from 'next/image';
 
@@ -54,9 +55,35 @@
       );
     };
 
-    const handleCheckout = () => {
-      router.push('/shipping')
-    }
+    const handleCheckout = async () => {
+      try {
+        const userId = uuidv4();
+        const orderId = uuidv4();
+        const response = await fetch('http://localhost:5000/api/checkout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            products: products,
+            totalAmount: calculateSubtotal() + shippingCost,
+            userId: userId,
+            orderId: orderId,
+          }),
+        });
+  
+        const data = await response.json();
+        if (response.ok) {
+          console.log('done')
+          // Redirect to the shipping page
+          router.push('/shipping');
+        } else {
+          console.error(data.error || 'Checkout failed');
+        }
+      } catch (error) {
+        console.error('An error occurred during checkout:', error);
+      }
+    };
 
     const renderQuantityControl = (index) => {
       return (
