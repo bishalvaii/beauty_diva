@@ -57,8 +57,7 @@
 
     const handleCheckout = async () => {
       try {
-        const userId = uuidv4();
-        const orderId = uuidv4();
+       
         const response = await fetch('http://localhost:5000/api/checkout', {
           method: 'POST',
           headers: {
@@ -67,8 +66,7 @@
           body: JSON.stringify({
             products: products,
             totalAmount: calculateSubtotal() + shippingCost,
-            userId: userId,
-            orderId: orderId,
+           
           }),
         });
   

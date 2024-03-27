@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button, Typography, TextField, FormControl, InputLabel, Select, MenuItem, Grid, Box } from '@mui/material';
 
@@ -20,18 +20,43 @@ const ShippingPage = () => {
     setPaymentGateway(event.target.value);
   };
 
-  const handleProceedToPayment = () => {
-    // Here you can handle the logic to proceed to payment based on the selected payment gateway
-    // For example, you can redirect to a specific URL for each payment gateway
-    if (paymentGateway === 'esewa') {
-      // Redirect to eSewa payment page
-      router.push('/paymentesewa');
+  const handleProceedToPayment = async() => {
+   try {
+    const response = await fetch('http://localhost:5000/api/shipping-details', {
+      method: 'POST',
+      headers: {  
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        fullName,
+        mobileNumber,
+        province,
+        city,
+        toleName,
+        paymentGateway
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to add shipping details');
     }
-     else {
-      // Redirect to Cash on Delivery page
-      router.push('/orderconfirmation');
-    }
+
+    const data = await response.json();
+    console.log(data)
+    const shippingDetailsId = data.shippingDetails.id; // Assuming the API returns the ID of the newly created shipping details
+ // Redirect to the appropriate payment page based on the selected payment gateway
+ if (paymentGateway === 'esewa') {
+  router.push('/paymentesewa');
+} else {
+  // Redirect to Cash on Delivery page or any other payment page
+  router.push('/orderconfirmation');
+}
+   } catch (error) {
+    console.error('Error adding shipping details:', error);
+    // Handle error (e.g., show error message to the user)
+  }
   };
+
 
   return (
     <Box sx={{ p: 3 }}>

@@ -36,7 +36,7 @@ const Dashboard = () => {
     router.push('/dashboard')
   }
 
-  const username = localStorage.getItem('username')
+  // const username = localStorage.getItem('username')
       return (
         <>
             {/* Navbar */}
@@ -59,9 +59,11 @@ const Dashboard = () => {
                             About Us
                         </Typography>
                         </Button>
-                        <Typography variant="h6" component="div" onClick={navigateToContact}>
+                        <Button onClick={navigateToContact}>
+                        <Typography variant="h6" component="div" >
                             Contact Us
                         </Typography>
+                        </Button>
                     </Box>
                     {/* Center section */}
                     <Typography variant="h6" component="div" sx={{ mr: 25 }}>
@@ -73,7 +75,7 @@ const Dashboard = () => {
                             <SearchIcon />
                         </IconButton>
                         <Avatar />
-                       {username}
+                       {""}
                         <IconButton color="inherit">
                             <ShoppingCartIcon />
                         </IconButton>
