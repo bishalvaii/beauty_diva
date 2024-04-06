@@ -74,7 +74,7 @@ const Dashboard = () => {
                         <IconButton color="inherit">
                             <SearchIcon />
                         </IconButton>
-                        <Avatar />
+                        <Avatar /> 
                        {""}
                         <IconButton color="inherit">
                             <ShoppingCartIcon />

@@ -25,29 +25,40 @@ const LoginPage = () => {
     // Perform validation here if needed
     // For now, just log the form data
    try {
+    const username = localStorage.getItem('username');
       const response = await fetch('http://localhost:5000/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          
+          // 'Username': username // Include the username in the request headers
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          username: formData.username, // Include the username in the request body
+          password: formData.password,
+        })
       })
 
       const data = await response.json()
+      console.log(data.user.isAdmin)
       if(response.ok) {
         setFormData({
           username: '',
           password: ''
         })
-        localStorage.setItem('userId', data.userId);
-        router.push('/dashboard');
+        localStorage.setItem('Username', formData.username);
+        if (data.user.isAdmin) {
+          router.push('/admin');
+        } else {
+
+          router.push('/dashboard');
+        }
       }
      else {
-      console.error(data.error || 'Login failed')
+      alert(data.error || 'Login failed')
     }
   } catch(error) {
         console.error('An error occured:', error)
+        alert('Invalid credentials!')
 
     }
 

@@ -57,22 +57,28 @@
 
     const handleCheckout = async () => {
       try {
-       
+        const username = localStorage.getItem('Username');
+        const orderData = {
+          products: products.map(product => ({
+            id: product.id,
+            quantity: product.quantity
+          })),
+          totalAmount: calculateSubtotal() + shippingCost,
+          username: username
+        };
+    
         const response = await fetch('http://localhost:5000/api/checkout', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            products: products,
-            totalAmount: calculateSubtotal() + shippingCost,
-           
-          }),
+          body: JSON.stringify(orderData),
         });
-  
+    
         const data = await response.json();
+        console.log(username);
         if (response.ok) {
-          console.log('done')
+          console.log('done');
           // Redirect to the shipping page
           router.push('/shipping');
         } else {
