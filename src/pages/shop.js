@@ -29,11 +29,20 @@ const router = useRouter()
       return products.slice(startIndex, endIndex);
   };
 
-const addToCart = (product) => {
-  setCartItems([...cartItems, product])
-  setCartCount(cartCount + 1)
-  console.log(cartItems)
-}
+  const addToCart = (product) => {
+    const existingItemIndex = cartItems.findIndex(item => item.id === product.id);
+    if (existingItemIndex !== -1) {
+      // If the product already exists in the cart, update its quantity
+      const updatedCartItems = [...cartItems];
+      updatedCartItems[existingItemIndex].quantity += 1;
+      setCartItems(updatedCartItems);
+    } else {
+      // If the product is not in the cart, add it with quantity 1
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
+    // Update the cart count
+    setCartCount(cartCount + 1);
+  }
 
 const calculateTotalAmount = () => {
   return cartItems.reduce((total, item) => total + (parseFloat(item.price) * item.quantity), 0).toFixed(2);

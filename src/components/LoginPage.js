@@ -63,6 +63,9 @@ const LoginPage = () => {
     }
 
   };
+  const navigateToSignup = () => {
+    router.push('/singup')
+  }
 
   return (
     <Grid container style={{ height: '100vh' }}>
@@ -110,6 +113,7 @@ const LoginPage = () => {
               <Button variant="contained" color="primary" fullWidth type="submit" style={{ marginTop: 20 }}>
                 Login 
               </Button>
+              <Typography >Don't have account? <Button sx={{ color: 'black', ml: 35}}onClick={navigateToSignup}>Sign Up!</Button></Typography>
             </form>
           </Paper>
         </Box>

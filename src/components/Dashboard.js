@@ -36,7 +36,7 @@ const Dashboard = () => {
     router.push('/dashboard')
   }
 
-  // const username = localStorage.getItem('username')
+   const username = localStorage.getItem('Username')
       return (
         <>
             {/* Navbar */}
@@ -66,15 +66,16 @@ const Dashboard = () => {
                         </Button>
                     </Box>
                     {/* Center section */}
-                    <Typography variant="h6" component="div" sx={{ mr: 25 }}>
+                    <Typography variant="h6" component="div" sx={{ mr: 25 , fontSize: 30,color: "#596398"}}>
                         Beauty Diva
                     </Typography>
                     {/* Right section */}
-                    <Box display="flex" alignItems="center">
+                    <Box display="flex" alignItems="center" sx={{mr: 2}}>
                         <IconButton color="inherit">
                             <SearchIcon />
                         </IconButton>
-                        <Avatar /> 
+                        <Avatar sx={{ color: 'black' }} /> {/* Set the color attribute for the Avatar */}
+  <Typography variant="body1" sx={{ color: '#596398', ml:2 }}>{username}</Typography> {/* Set the text color for the username */}
                        {""}
                         <IconButton color="inherit">
                             <ShoppingCartIcon />

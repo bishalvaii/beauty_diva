@@ -32,7 +32,10 @@ const AdminOrders = () => {
             <TableCell>Order Created At</TableCell>
             <TableCell>Product ID</TableCell>
             <TableCell>Quantity</TableCell>
-            <TableCell>Unit Price</TableCell>
+            <TableCell>Mobile Number</TableCell>
+        <TableCell>Address</TableCell>
+        <TableCell>Payment Gateway</TableCell>
+            
           </TableRow>
         </TableHead>
         <TableBody>
@@ -44,7 +47,10 @@ const AdminOrders = () => {
               <TableCell>{order.order_created_at}</TableCell>
               <TableCell>{order.product_id}</TableCell>
               <TableCell>{order.quantity}</TableCell>
-              <TableCell>{order.unit_price}</TableCell>
+              <TableCell>{order.mobile_number}</TableCell>
+            <TableCell>{order.address}</TableCell>
+            <TableCell>{order.payment_gateway}</TableCell>
+             
             </TableRow>
           ))}
         </TableBody>

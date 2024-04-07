@@ -11,10 +11,9 @@ const ShippingPage = () => {
   const [province, setProvince] = useState('');
   const [city, setCity] = useState('');
   const [toleName, setToleName] = useState('');
+  const [address, setAddress]  = useState('')
 
-  const handleAddressChange = (event) => {
-    setDeliveryAddress(event.target.value);
-  };
+ 
 
   const handlePaymentGatewayChange = (event) => {
     setPaymentGateway(event.target.value);
@@ -33,7 +32,8 @@ const ShippingPage = () => {
         province,
         city,
         toleName,
-        paymentGateway
+        paymentGateway,
+        address
       }),
     });
 
@@ -78,6 +78,7 @@ const ShippingPage = () => {
             value={mobileNumber}
             onChange={(e) => setMobileNumber(e.target.value)}
             fullWidth
+            required
           />
         </Grid>
         <Grid item xs={6}>
@@ -99,9 +100,10 @@ const ShippingPage = () => {
         <Grid item xs={6}>
           <TextField
             label="Address"
-            value={deliveryAddress}
-            onChange={handleAddressChange}
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
             fullWidth
+            required
           />
         </Grid>
         <Grid item xs={6}>
@@ -113,7 +115,7 @@ const ShippingPage = () => {
           />
         </Grid>
         <Grid item xs={6}>
-          <FormControl fullWidth>
+          <FormControl fullWidth required>
           <Typography sx={{fontWeight: 'bold'}}>Select payment gateway</Typography>
             <Select
               labelId="payment-gateway-label"
