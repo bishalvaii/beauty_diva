@@ -16,6 +16,8 @@ const SignupPage = () => {
     confirmPassword: ''
   });
 
+  const [error, setError] = useState('');
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -26,7 +28,20 @@ const SignupPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Clear previous error
+    setError('');
   
+    // Validate form fields
+    if (!formData.fullName || !formData.contactNo || !formData.email || !formData.username || !formData.password || !formData.confirmPassword) {
+      setError('Please fill in all fields');
+      return;
+    }
+  
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
     try {
       // Make POST request to signup endpoint
       const response = await fetch('http://localhost:5000/api/signup', {
@@ -58,10 +73,11 @@ const SignupPage = () => {
         // Navigate to the login page
         router.push('/login');
       } else {
-        console.error(data.error || 'Signup failed');
+        setError(data.error || 'Signup failed');
       }
     } catch (error) {
       console.error('An error occurred:', error);
+      setError('An error occurred while signing up');
     }
   };
 
@@ -142,6 +158,7 @@ const SignupPage = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
               />
+              {error && <Typography color="error" variant="subtitle2" style={{ marginBottom: 10 }}>{error}</Typography>}
               <Button variant="contained" color="primary" fullWidth type="submit" style={{ marginTop: 20 }}>
                 Sign Up
               </Button>

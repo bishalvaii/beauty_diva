@@ -11,6 +11,7 @@ const LoginPage = () => {
     username: '',
     password: '',
   });
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,50 +23,45 @@ const LoginPage = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    // Perform validation here if needed
-    // For now, just log the form data
-   try {
-    const username = localStorage.getItem('username');
+    setError(''); // Clear previous error
+    // Validate form fields
+    if (!formData.username || !formData.password) {
+      setError('Please enter both username and password');
+      return;
+    }
+    try {
       const response = await fetch('http://localhost:5000/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // 'Username': username // Include the username in the request headers
         },
         body: JSON.stringify({
-          username: formData.username, // Include the username in the request body
+          username: formData.username,
           password: formData.password,
         })
       })
 
-      const data = await response.json()
-      console.log(data.user.isAdmin)
-      if(response.ok) {
-        setFormData({
-          username: '',
-          password: ''
-        })
+      const data = await response.json();
+      if (response.ok) {
+        setFormData({ username: '', password: '' });
         localStorage.setItem('Username', formData.username);
         if (data.user.isAdmin) {
           router.push('/admin');
         } else {
-
           router.push('/dashboard');
         }
+      } else {
+        setError(data.error || 'Login failed');
       }
-     else {
-      alert(data.error || 'Login failed')
+    } catch(error) {
+      console.error('An error occurred:', error);
+      setError('Invalid credentials!');
     }
-  } catch(error) {
-        console.error('An error occured:', error)
-        alert('Invalid credentials!')
-
-    }
-
   };
+
   const navigateToSignup = () => {
-    router.push('/singup')
-  }
+    router.push('/signup');
+  };
 
   return (
     <Grid container style={{ height: '100vh' }}>
@@ -108,12 +104,11 @@ const LoginPage = () => {
                 value={formData.password}
                 onChange={handleChange}
               />
-             
-              
+              {error && <Typography color="error" variant="subtitle2" style={{ marginBottom: 10 }}>{error}</Typography>}
               <Button variant="contained" color="primary" fullWidth type="submit" style={{ marginTop: 20 }}>
                 Login 
               </Button>
-              <Typography >Don't have account? <Button sx={{ color: 'black', ml: 35}}onClick={navigateToSignup}>Sign Up!</Button></Typography>
+              <Typography >Don't have an account? <Button sx={{ color: 'black', ml: 35}}onClick={navigateToSignup}>Sign Up!</Button></Typography>
             </form>
           </Paper>
         </Box>

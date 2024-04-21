@@ -1,5 +1,4 @@
 import { AppBar, Avatar, Box, Button, Grid, IconButton, Toolbar, Typography } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Image from 'next/image';
 import heroimg from '../images/heroimg.png';
@@ -71,9 +70,7 @@ const Dashboard = () => {
                     </Typography>
                     {/* Right section */}
                     <Box display="flex" alignItems="center" sx={{mr: 2}}>
-                        <IconButton color="inherit">
-                            <SearchIcon />
-                        </IconButton>
+                       
                         <Avatar sx={{ color: 'black' }} /> {/* Set the color attribute for the Avatar */}
   <Typography variant="body1" sx={{ color: '#596398', ml:2 }}>{username}</Typography> {/* Set the text color for the username */}
                        {""}
@@ -255,7 +252,7 @@ const Dashboard = () => {
             "Introducing our latest makeup collection—a symphony of colors and
  textures. Elevate your beauty routine with these exquisite, trend
 setting essentials."            </Typography>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={navigateToShop}>
               Shop the collection
             </Button>
           </Box>

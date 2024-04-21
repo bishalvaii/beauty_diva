@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button, Typography, TextField, FormControl, InputLabel, Select, MenuItem, Grid, Box } from '@mui/material';
 
+
 const ShippingPage = () => {
   const router = useRouter();
   const [deliveryAddress, setDeliveryAddress] = useState('');
@@ -46,6 +47,7 @@ const ShippingPage = () => {
     const shippingDetailsId = data.shippingDetails.id; // Assuming the API returns the ID of the newly created shipping details
  // Redirect to the appropriate payment page based on the selected payment gateway
  if (paymentGateway === 'esewa') {
+       
   router.push('/paymentesewa');
 } else {
   // Redirect to Cash on Delivery page or any other payment page
