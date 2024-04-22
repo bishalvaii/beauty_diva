@@ -3,6 +3,9 @@ import { Grid, Paper, TextField, Button, Typography, Box } from '@mui/material';
 import Image from 'next/image';
 import signupimg from "../images/signupimg.png";
 import { useRouter } from 'next/navigation'; // Import the useRouter hook
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const SignupPage = () => {
   const router = useRouter(); // Initialize the useRouter hook
@@ -70,9 +73,13 @@ const SignupPage = () => {
           password: '',
           confirmPassword: '',
         });
+        setTimeout(() => router.push('/login'), 2000);
+       
+        toast.success('User signed up successfully!')
         // Navigate to the login page
-        router.push('/login');
+        
       } else {
+        toast.error("Sign Up failed!")
         setError(data.error || 'Signup failed');
       }
     } catch (error) {
@@ -82,6 +89,7 @@ const SignupPage = () => {
   };
 
   return (
+    <>
     <Grid container style={{ height: '100vh' }}>
       {/* Left side with image */}
       <Grid item xs={6}>
@@ -167,6 +175,8 @@ const SignupPage = () => {
         </Box>
       </Grid>
     </Grid>
+    <ToastContainer />
+    </>
   );
 };
 

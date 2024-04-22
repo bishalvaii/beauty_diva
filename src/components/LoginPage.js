@@ -3,6 +3,8 @@ import { useRouter } from 'next/navigation';
 import { Grid, Paper, TextField, Button, Typography, Box } from '@mui/material';
 import signupimg from "../images/signupimg.png";
 import Image from 'next/image';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const LoginPage = () => {
@@ -46,12 +48,14 @@ const LoginPage = () => {
         setFormData({ username: '', password: '' });
         localStorage.setItem('Username', formData.username);
         if (data.user.isAdmin) {
-          router.push('/admin');
+          setTimeout(() => router.push('/admin'), 2000); // Navigate after 2 seconds
         } else {
-          router.push('/dashboard');
+          setTimeout(() => router.push('/dashboard'), 2000); // Navigate after 2 seconds
         }
+        toast.success('Login Successful')
       } else {
         setError(data.error || 'Login failed');
+      toast.error("Login Failed! Check your credentials")
       }
     } catch(error) {
       console.error('An error occurred:', error);
@@ -64,6 +68,8 @@ const LoginPage = () => {
   };
 
   return (
+    <>
+       <ToastContainer /> 
     <Grid container style={{ height: '100vh' }}>
       {/* Left side with image */}
       <Grid item xs={6}>
@@ -110,10 +116,13 @@ const LoginPage = () => {
               </Button>
               <Typography >Don't have an account? <Button sx={{ color: 'black', ml: 35}}onClick={navigateToSignup}>Sign Up!</Button></Typography>
             </form>
+            
           </Paper>
         </Box>
       </Grid>
     </Grid>
+ 
+      </>
   );
 };
 

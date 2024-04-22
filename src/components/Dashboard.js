@@ -35,6 +35,10 @@ const Dashboard = () => {
     router.push('/dashboard')
   }
 
+  const handleNavigate = (url) => {
+    window.open(url, '_blank'); 
+  };
+
    const username = localStorage.getItem('Username')
       return (
         <>
@@ -301,15 +305,15 @@ setting essentials."            </Typography>
       
     </Box>
     <Box position="absolute" >
-        <IconButton color="inherit" aria-label="facebook">
-          <Facebook />
-        </IconButton>
-        <IconButton color="inherit" aria-label="instagram">
-          <Instagram />
-        </IconButton>
-        <IconButton color="inherit" aria-label="pinterest">
-          <Pinterest />
-        </IconButton>
+    <IconButton color="inherit" aria-label="facebook" onClick={() => handleNavigate('https://www.facebook.com')}>
+        <Facebook />
+      </IconButton>
+      <IconButton color="inherit" aria-label="instagram" onClick={() => handleNavigate('https://www.instagram.com')}>
+        <Instagram />
+      </IconButton>
+      <IconButton color="inherit" aria-label="pinterest" onClick={() => handleNavigate('https://www.pinterest.com')}>
+        <Pinterest />
+      </IconButton>
       </Box>
 
         </>

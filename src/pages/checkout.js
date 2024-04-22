@@ -76,6 +76,8 @@
         });
     
         const data = await response.json();
+        const orderId = data.orderId;
+        localStorage.setItem('orderId', orderId); 
         console.log(username);
         if (response.ok) {
           console.log('done');
